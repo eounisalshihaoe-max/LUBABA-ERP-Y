@@ -1,0 +1,407 @@
+Using launch settings from LUBABA.API\Properties\launchSettings.json...
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5062
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: D:\LUBABA\LUBABA.API
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+      Failed to determine the https port for redirect.
+warn: LuckyPennySoftware.MediatR.License[0]
+      You do not have a valid license key for the Lucky Penny software MediatR. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+warn: Microsoft.EntityFrameworkCore.Model.Validation[30000]
+      No store type was specified for the decimal property 'PurchaseInvoiceApprovalThreshold' on entity type 'ApprovalSettings'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+warn: Microsoft.EntityFrameworkCore.Model.Validation[30000]
+      No store type was specified for the decimal property 'SalesInvoiceApprovalThreshold' on entity type 'ApprovalSettings'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+warn: Microsoft.EntityFrameworkCore.Model.Validation[30000]
+      No store type was specified for the decimal property 'GrossAmount' on entity type 'SalesInvoiceLine'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+warn: Microsoft.EntityFrameworkCore.Model.Validation[30000]
+      No store type was specified for the decimal property 'NetAmount' on entity type 'SalesInvoiceLine'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (631ms) [Parameters=[@userName='?' (Size = 100)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [u].[Id], [u].[CreatedAt], [u].[CreatedBy], [u].[DeletedAt], [u].[DeletedBy], [u].[IsActive], [u].[IsDeleted], [u].[PasswordHash], [u].[RoleId], [u].[RowVersion], [u].[UpdatedAt], [u].[UpdatedBy], [u].[UserName], [r0].[Id], [r0].[CreatedAt], [r0].[CreatedBy], [r0].[DeletedAt], [r0].[DeletedBy], [r0].[Description], [r0].[IsActive], [r0].[IsDeleted], [r0].[Name], [r0].[RowVersion], [r0].[UpdatedAt], [r0].[UpdatedBy]
+      FROM [Users] AS [u]
+      INNER JOIN (
+          SELECT [r].[Id], [r].[CreatedAt], [r].[CreatedBy], [r].[DeletedAt], [r].[DeletedBy], [r].[Description], [r].[IsActive], [r].[IsDeleted], [r].[Name], [r].[RowVersion], [r].[UpdatedAt], [r].[UpdatedBy]
+          FROM [Roles] AS [r]
+          WHERE [r].[IsDeleted] = CAST(0 AS bit)
+      ) AS [r0] ON [u].[RoleId] = [r0].[Id]
+      WHERE [u].[IsDeleted] = CAST(0 AS bit) AND [u].[UserName] = @userName
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (102ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[Id], [c].[Code], [c].[ArabicName], [c].[EnglishName], [c].[CurrencyId], [c1].[Code] AS [CurrencyCode], [c].[IsActive]
+      FROM [Companies] AS [c]
+      INNER JOIN (
+          SELECT [c0].[Id], [c0].[Code]
+          FROM [Currencies] AS [c0]
+          WHERE [c0].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c1] ON [c].[CurrencyId] = [c1].[Id]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit)
+      ORDER BY [c].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (114ms) [Parameters=[@request_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT [s].[Id], [s].[DocumentNumber], [s].[DocumentDate], [s].[DueDate], [s].[CustomerId], [s].[WarehouseId], [s].[CustomerReference], [s].[SubTotal], [s].[TotalDiscount], [s].[TotalTax], [s].[TotalAmount], [s].[Notes], [s].[Status]
+      FROM [SalesInvoices] AS [s]
+      WHERE [s].[IsDeleted] = CAST(0 AS bit) AND [s].[CompanyId] = @request_CompanyId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (35ms) [Parameters=[@request_SalesInvoiceId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [s].[Id], [s].[BranchId], [s].[CompanyId], [s].[CreatedAt], [s].[CreatedBy], [s].[CustomerId], [s].[CustomerReference], [s].[DeletedAt], [s].[DeletedBy], [s].[DocumentDate], [s].[DocumentNumber], [s].[DueDate], [s].[FirstApprovedAtUtc], [s].[FirstApprovedByUserId], [s].[IsDeleted], [s].[Notes], [s].[PosSessionId], [s].[PostedAt], [s].[PostedBy], [s].[RowVersion], [s].[SecondApprovedAtUtc], [s].[SecondApprovedByUserId], [s].[Status], [s].[SubTotal], [s].[TotalAmount], [s].[TotalDiscount], [s].[TotalTax], [s].[UpdatedAt], [s].[UpdatedBy], [s].[WarehouseId]
+      FROM [SalesInvoices] AS [s]
+      WHERE [s].[IsDeleted] = CAST(0 AS bit) AND [s].[Id] = @request_SalesInvoiceId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (65ms) [Parameters=[@invoice_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [c].[Id], [c].[Address], [c].[ArabicName], [c].[City], [c].[Code], [c].[CommercialName], [c].[Country], [c].[CreatedAt], [c].[CreatedBy], [c].[CurrencyId], [c].[DeletedAt], [c].[DeletedBy], [c].[Email], [c].[EnglishName], [c].[IsActive], [c].[IsDeleted], [c].[Logo], [c].[Mobile], [c].[Phone], [c].[PostalCode], [c].[RegistrationNumber], [c].[RowVersion], [c].[TaxNumber], [c].[UpdatedAt], [c].[UpdatedBy], [c].[Website]
+      FROM [Companies] AS [c]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[Id] = @invoice_CompanyId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (71ms) [Parameters=[@invoice_CustomerId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [c].[Id], [c].[Address], [c].[ArabicName], [c].[BranchId], [c].[Code], [c].[CompanyId], [c].[CreatedAt], [c].[CreatedBy], [c].[CreditLimit], [c].[DeletedAt], [c].[DeletedBy], [c].[Email], [c].[EnglishName], [c].[IsActive], [c].[IsDeleted], [c].[Mobile], [c].[Phone], [c].[ReceivableAccountId], [c].[RowVersion], [c].[TaxNumber], [c].[UpdatedAt], [c].[UpdatedBy]
+      FROM [Customers] AS [c]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[Id] = @invoice_CustomerId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@company_CurrencyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [c].[Code]
+      FROM [Currencies] AS [c]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[Id] = @company_CurrencyId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (111ms) [Parameters=[@invoice_Id='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [e].[Id], [e].[AttemptCount], [e].[CreatedAt], [e].[CreatedBy], [e].[DeletedAt], [e].[DeletedBy], [e].[ExternalReferenceId], [e].[IsDeleted], [e].[LastAttemptAtUtc], [e].[ProviderName], [e].[QrCodePayload], [e].[ResponseMessage], [e].[RowVersion], [e].[SalesInvoiceId], [e].[Status], [e].[UpdatedAt], [e].[UpdatedBy]
+      FROM [EInvoiceSubmissions] AS [e]
+      WHERE [e].[IsDeleted] = CAST(0 AS bit) AND [e].[SalesInvoiceId] = @invoice_Id
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (151ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (DbType = Guid), @p4='?' (DbType = DateTime2), @p5='?' (DbType = Guid), @p6='?' (Size = 100), @p7='?' (DbType = Guid), @p8='?' (Size = 100), @p9='?' (DbType = Guid), @p10='?' (DbType = Int32), @p11='?' (DbType = DateTime2), @p12='?' (Size = 4000), @p13='?' (DbType = DateTime2), @p14='?' (Size = 4000), @p15='?' (Size = 200), @p16='?' (DbType = Boolean), @p17='?' (DbType = DateTime2), @p18='?' (Size = 50), @p19='?' (Size = 2000), @p20='?' (Size = 1000), @p21='?' (DbType = Guid), @p22='?' (DbType = Int32), @p23='?' (DbType = DateTime2), @p24='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+      SET NOCOUNT ON;
+      INSERT INTO [AuditLogs] ([Id], [Action], [ChangesJson], [CompanyId], [CreatedAtUtc], [EntityId], [EntityName], [UserId], [UserName])
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+      INSERT INTO [EInvoiceSubmissions] ([Id], [AttemptCount], [CreatedAt], [CreatedBy], [DeletedAt], [DeletedBy], [ExternalReferenceId], [IsDeleted], [LastAttemptAtUtc], [ProviderName], [QrCodePayload], [ResponseMessage], [SalesInvoiceId], [Status], [UpdatedAt], [UpdatedBy])
+      OUTPUT INSERTED.[RowVersion]
+      VALUES (@p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24);
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (31ms) [Parameters=[@request_SalesInvoiceId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [e].[ProviderName], CASE [e].[Status]
+          WHEN 1 THEN N'NotConfigured'
+          WHEN 2 THEN N'Pending'
+          WHEN 3 THEN N'Accepted'
+          WHEN 4 THEN N'Rejected'
+          WHEN 5 THEN N'Failed'
+          ELSE CAST([e].[Status] AS nvarchar(max))
+      END, [e].[ExternalReferenceId], [e].[ResponseMessage], [e].[AttemptCount], [e].[LastAttemptAtUtc]
+      FROM [EInvoiceSubmissions] AS [e]
+      WHERE [e].[IsDeleted] = CAST(0 AS bit) AND [e].[SalesInvoiceId] = @request_SalesInvoiceId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (11ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[Id], [c].[Code], [c].[ArabicName], [c].[EnglishName], [c].[CurrencyId], [c1].[Code] AS [CurrencyCode], [c].[IsActive]
+      FROM [Companies] AS [c]
+      INNER JOIN (
+          SELECT [c0].[Id], [c0].[Code]
+          FROM [Currencies] AS [c0]
+          WHERE [c0].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c1] ON [c].[CurrencyId] = [c1].[Id]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit)
+      ORDER BY [c].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (34ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[Id], [c].[Code], [c].[ArabicName], [c].[EnglishName], [c].[CurrencyId], [c1].[Code] AS [CurrencyCode], [c].[IsActive]
+      FROM [Companies] AS [c]
+      INNER JOIN (
+          SELECT [c0].[Id], [c0].[Code]
+          FROM [Currencies] AS [c0]
+          WHERE [c0].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c1] ON [c].[CurrencyId] = [c1].[Id]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit)
+      ORDER BY [c].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (25ms) [Parameters=[@request_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[Id], [c].[CompanyId], [c].[BranchId], [c].[Code], [c].[ArabicName], [c].[EnglishName], [c].[Phone], [c].[Mobile], [c].[Email], [c].[CreditLimit], [c].[IsActive]
+      FROM [Customers] AS [c]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[CompanyId] = @request_CompanyId
+      ORDER BY [c].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (224ms) [Parameters=[@request_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT [p].[Id], [p].[CompanyId], [p].[Code], [p].[Barcode], [p].[ArabicName], [p].[EnglishName], [p].[Description], [p].[CategoryId], [c0].[ArabicName], [p].[UnitOfMeasureId], [u0].[ArabicName], [p].[PurchasePrice], [p].[SalePrice], [p].[MinimumStock], [p].[IsActive]
+      FROM [Products] AS [p]
+      INNER JOIN (
+          SELECT [c].[Id], [c].[ArabicName]
+          FROM [Categories] AS [c]
+          WHERE [c].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c0] ON [p].[CategoryId] = [c0].[Id]
+      INNER JOIN (
+          SELECT [u].[Id], [u].[ArabicName]
+          FROM [UnitsOfMeasure] AS [u]
+          WHERE [u].[IsDeleted] = CAST(0 AS bit)
+      ) AS [u0] ON [p].[UnitOfMeasureId] = [u0].[Id]
+      WHERE [p].[IsDeleted] = CAST(0 AS bit) AND [p].[CompanyId] = @request_CompanyId
+      ORDER BY [p].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (329ms) [Parameters=[@p='?' (DbType = Int32), @request_CompanyId='?' (DbType = Guid), @today='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+      SELECT [c1].[Id], [c1].[DocumentNumber], [c1].[RemainingAmount], [c1].[DueDate], [c2].[ArabicName] AS [CustomerName]
+      FROM (
+          SELECT TOP(@p) [c].[Id], [c].[CustomerId], [c].[DocumentNumber], [c].[DueDate], [c].[RemainingAmount]
+          FROM [CustomerReceivables] AS [c]
+          WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[CompanyId] = @request_CompanyId AND [c].[RemainingAmount] > 0.0 AND [c].[DueDate] IS NOT NULL AND CONVERT(date, [c].[DueDate]) < @today
+          ORDER BY [c].[DueDate]
+      ) AS [c1]
+      INNER JOIN (
+          SELECT [c0].[Id], [c0].[ArabicName]
+          FROM [Customers] AS [c0]
+          WHERE [c0].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c2] ON [c1].[CustomerId] = [c2].[Id]
+      ORDER BY [c1].[DueDate]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (206ms) [Parameters=[@p='?' (DbType = Int32), @request_CompanyId='?' (DbType = Guid), @today='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(@p) [s].[Id], [s].[DocumentNumber], [s].[RemainingAmount], [s].[DueDate], [s].[SupplierId]
+      FROM [SupplierPayables] AS [s]
+      WHERE [s].[IsDeleted] = CAST(0 AS bit) AND [s].[CompanyId] = @request_CompanyId AND [s].[RemainingAmount] > 0.0 AND [s].[DueDate] IS NOT NULL AND CONVERT(date, [s].[DueDate]) < @today
+      ORDER BY [s].[DueDate]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (265ms) [Parameters=[@request_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT [w].[Id], [w].[CompanyId], [w].[BranchId], [w].[Code], [w].[ArabicName], [w].[EnglishName], [w].[Address], [w].[IsActive]
+      FROM [Warehouses] AS [w]
+      WHERE [w].[IsDeleted] = CAST(0 AS bit) AND [w].[IsDeleted] = CAST(0 AS bit) AND [w].[CompanyId] = @request_CompanyId
+      ORDER BY [w].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (91ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [s].[Id], [s].[Address], [s].[ArabicName], [s].[BranchId], [s].[Code], [s].[CompanyId], [s].[CreatedAt], [s].[CreatedBy], [s].[CreditLimit], [s].[DeletedAt], [s].[DeletedBy], [s].[Email], [s].[EnglishName], [s].[IsActive], [s].[IsDeleted], [s].[Mobile], [s].[PayableAccountId], [s].[Phone], [s].[RowVersion], [s].[TaxNumber], [s].[UpdatedAt], [s].[UpdatedBy]
+      FROM [Suppliers] AS [s]
+      WHERE 0 = 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (15ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[Id], [c].[Code], [c].[ArabicName], [c].[EnglishName], [c].[CurrencyId], [c1].[Code] AS [CurrencyCode], [c].[IsActive]
+      FROM [Companies] AS [c]
+      INNER JOIN (
+          SELECT [c0].[Id], [c0].[Code]
+          FROM [Currencies] AS [c0]
+          WHERE [c0].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c1] ON [c].[CurrencyId] = [c1].[Id]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit)
+      ORDER BY [c].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (7ms) [Parameters=[@request_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT [s].[Id], [s].[DocumentNumber], [s].[DocumentDate], [s].[DueDate], [s].[CustomerId], [s].[WarehouseId], [s].[CustomerReference], [s].[SubTotal], [s].[TotalDiscount], [s].[TotalTax], [s].[TotalAmount], [s].[Notes], [s].[Status]
+      FROM [SalesInvoices] AS [s]
+      WHERE [s].[IsDeleted] = CAST(0 AS bit) AND [s].[CompanyId] = @request_CompanyId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (379ms) [Parameters=[@p='?' (DbType = Int32), @request_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT [s].[Id], [s].[ArabicName] AS [ProductArabicName], [s].[Code] AS [ProductCode], [w0].[ArabicName] AS [WarehouseArabicName], [s].[QuantityOnHand], [s].[MinimumStock]
+      FROM (
+          SELECT TOP(@p) [i].[Id], [i].[QuantityOnHand], [i].[WarehouseId], [p0].[ArabicName], [p0].[Code], [p0].[MinimumStock]
+          FROM [Inventories] AS [i]
+          INNER JOIN (
+              SELECT [p].[Id], [p].[ArabicName], [p].[Code], [p].[MinimumStock]
+              FROM [Products] AS [p]
+              WHERE [p].[IsDeleted] = CAST(0 AS bit)
+          ) AS [p0] ON [i].[ProductId] = [p0].[Id]
+          WHERE [i].[IsDeleted] = CAST(0 AS bit) AND [i].[CompanyId] = @request_CompanyId AND [p0].[MinimumStock] > 0.0 AND [i].[QuantityOnHand] <= [p0].[MinimumStock]
+          ORDER BY [i].[QuantityOnHand]
+      ) AS [s]
+      INNER JOIN (
+          SELECT [w].[Id], [w].[ArabicName]
+          FROM [Warehouses] AS [w]
+          WHERE [w].[IsDeleted] = CAST(0 AS bit)
+      ) AS [w0] ON [s].[WarehouseId] = [w0].[Id]
+      ORDER BY [s].[QuantityOnHand]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[Id], [c].[Code], [c].[ArabicName], [c].[EnglishName], [c].[CurrencyId], [c1].[Code] AS [CurrencyCode], [c].[IsActive]
+      FROM [Companies] AS [c]
+      INNER JOIN (
+          SELECT [c0].[Id], [c0].[Code]
+          FROM [Currencies] AS [c0]
+          WHERE [c0].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c1] ON [c].[CurrencyId] = [c1].[Id]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit)
+      ORDER BY [c].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@p='?' (DbType = Int32), @request_CompanyId='?' (DbType = Guid), @today='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+      SELECT [c1].[Id], [c1].[DocumentNumber], [c1].[RemainingAmount], [c1].[DueDate], [c2].[ArabicName] AS [CustomerName]
+      FROM (
+          SELECT TOP(@p) [c].[Id], [c].[CustomerId], [c].[DocumentNumber], [c].[DueDate], [c].[RemainingAmount]
+          FROM [CustomerReceivables] AS [c]
+          WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[CompanyId] = @request_CompanyId AND [c].[RemainingAmount] > 0.0 AND [c].[DueDate] IS NOT NULL AND CONVERT(date, [c].[DueDate]) < @today
+          ORDER BY [c].[DueDate]
+      ) AS [c1]
+      INNER JOIN (
+          SELECT [c0].[Id], [c0].[ArabicName]
+          FROM [Customers] AS [c0]
+          WHERE [c0].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c2] ON [c1].[CustomerId] = [c2].[Id]
+      ORDER BY [c1].[DueDate]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[@p='?' (DbType = Int32), @request_CompanyId='?' (DbType = Guid), @today='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(@p) [s].[Id], [s].[DocumentNumber], [s].[RemainingAmount], [s].[DueDate], [s].[SupplierId]
+      FROM [SupplierPayables] AS [s]
+      WHERE [s].[IsDeleted] = CAST(0 AS bit) AND [s].[CompanyId] = @request_CompanyId AND [s].[RemainingAmount] > 0.0 AND [s].[DueDate] IS NOT NULL AND CONVERT(date, [s].[DueDate]) < @today
+      ORDER BY [s].[DueDate]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [s].[Id], [s].[Address], [s].[ArabicName], [s].[BranchId], [s].[Code], [s].[CompanyId], [s].[CreatedAt], [s].[CreatedBy], [s].[CreditLimit], [s].[DeletedAt], [s].[DeletedBy], [s].[Email], [s].[EnglishName], [s].[IsActive], [s].[IsDeleted], [s].[Mobile], [s].[PayableAccountId], [s].[Phone], [s].[RowVersion], [s].[TaxNumber], [s].[UpdatedAt], [s].[UpdatedBy]
+      FROM [Suppliers] AS [s]
+      WHERE 0 = 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@p='?' (DbType = Int32), @request_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT [s].[Id], [s].[ArabicName] AS [ProductArabicName], [s].[Code] AS [ProductCode], [w0].[ArabicName] AS [WarehouseArabicName], [s].[QuantityOnHand], [s].[MinimumStock]
+      FROM (
+          SELECT TOP(@p) [i].[Id], [i].[QuantityOnHand], [i].[WarehouseId], [p0].[ArabicName], [p0].[Code], [p0].[MinimumStock]
+          FROM [Inventories] AS [i]
+          INNER JOIN (
+              SELECT [p].[Id], [p].[ArabicName], [p].[Code], [p].[MinimumStock]
+              FROM [Products] AS [p]
+              WHERE [p].[IsDeleted] = CAST(0 AS bit)
+          ) AS [p0] ON [i].[ProductId] = [p0].[Id]
+          WHERE [i].[IsDeleted] = CAST(0 AS bit) AND [i].[CompanyId] = @request_CompanyId AND [p0].[MinimumStock] > 0.0 AND [i].[QuantityOnHand] <= [p0].[MinimumStock]
+          ORDER BY [i].[QuantityOnHand]
+      ) AS [s]
+      INNER JOIN (
+          SELECT [w].[Id], [w].[ArabicName]
+          FROM [Warehouses] AS [w]
+          WHERE [w].[IsDeleted] = CAST(0 AS bit)
+      ) AS [w0] ON [s].[WarehouseId] = [w0].[Id]
+      ORDER BY [s].[QuantityOnHand]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[Id], [c].[Code], [c].[ArabicName], [c].[EnglishName], [c].[CurrencyId], [c1].[Code] AS [CurrencyCode], [c].[IsActive]
+      FROM [Companies] AS [c]
+      INNER JOIN (
+          SELECT [c0].[Id], [c0].[Code]
+          FROM [Currencies] AS [c0]
+          WHERE [c0].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c1] ON [c].[CurrencyId] = [c1].[Id]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit)
+      ORDER BY [c].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[Id], [c].[Code], [c].[ArabicName], [c].[EnglishName], [c].[CurrencyId], [c1].[Code] AS [CurrencyCode], [c].[IsActive]
+      FROM [Companies] AS [c]
+      INNER JOIN (
+          SELECT [c0].[Id], [c0].[Code]
+          FROM [Currencies] AS [c0]
+          WHERE [c0].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c1] ON [c].[CurrencyId] = [c1].[Id]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit)
+      ORDER BY [c].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@request_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[Id], [c].[CompanyId], [c].[BranchId], [c].[Code], [c].[ArabicName], [c].[EnglishName], [c].[Phone], [c].[Mobile], [c].[Email], [c].[CreditLimit], [c].[IsActive]
+      FROM [Customers] AS [c]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[CompanyId] = @request_CompanyId
+      ORDER BY [c].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@p='?' (DbType = Int32), @request_CompanyId='?' (DbType = Guid), @today='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+      SELECT [c1].[Id], [c1].[DocumentNumber], [c1].[RemainingAmount], [c1].[DueDate], [c2].[ArabicName] AS [CustomerName]
+      FROM (
+          SELECT TOP(@p) [c].[Id], [c].[CustomerId], [c].[DocumentNumber], [c].[DueDate], [c].[RemainingAmount]
+          FROM [CustomerReceivables] AS [c]
+          WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[CompanyId] = @request_CompanyId AND [c].[RemainingAmount] > 0.0 AND [c].[DueDate] IS NOT NULL AND CONVERT(date, [c].[DueDate]) < @today
+          ORDER BY [c].[DueDate]
+      ) AS [c1]
+      INNER JOIN (
+          SELECT [c0].[Id], [c0].[ArabicName]
+          FROM [Customers] AS [c0]
+          WHERE [c0].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c2] ON [c1].[CustomerId] = [c2].[Id]
+      ORDER BY [c1].[DueDate]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@p='?' (DbType = Int32), @request_CompanyId='?' (DbType = Guid), @today='?' (DbType = DateTime2)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(@p) [s].[Id], [s].[DocumentNumber], [s].[RemainingAmount], [s].[DueDate], [s].[SupplierId]
+      FROM [SupplierPayables] AS [s]
+      WHERE [s].[IsDeleted] = CAST(0 AS bit) AND [s].[CompanyId] = @request_CompanyId AND [s].[RemainingAmount] > 0.0 AND [s].[DueDate] IS NOT NULL AND CONVERT(date, [s].[DueDate]) < @today
+      ORDER BY [s].[DueDate]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [s].[Id], [s].[Address], [s].[ArabicName], [s].[BranchId], [s].[Code], [s].[CompanyId], [s].[CreatedAt], [s].[CreatedBy], [s].[CreditLimit], [s].[DeletedAt], [s].[DeletedBy], [s].[Email], [s].[EnglishName], [s].[IsActive], [s].[IsDeleted], [s].[Mobile], [s].[PayableAccountId], [s].[Phone], [s].[RowVersion], [s].[TaxNumber], [s].[UpdatedAt], [s].[UpdatedBy]
+      FROM [Suppliers] AS [s]
+      WHERE 0 = 1
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@p='?' (DbType = Int32), @request_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT [s].[Id], [s].[ArabicName] AS [ProductArabicName], [s].[Code] AS [ProductCode], [w0].[ArabicName] AS [WarehouseArabicName], [s].[QuantityOnHand], [s].[MinimumStock]
+      FROM (
+          SELECT TOP(@p) [i].[Id], [i].[QuantityOnHand], [i].[WarehouseId], [p0].[ArabicName], [p0].[Code], [p0].[MinimumStock]
+          FROM [Inventories] AS [i]
+          INNER JOIN (
+              SELECT [p].[Id], [p].[ArabicName], [p].[Code], [p].[MinimumStock]
+              FROM [Products] AS [p]
+              WHERE [p].[IsDeleted] = CAST(0 AS bit)
+          ) AS [p0] ON [i].[ProductId] = [p0].[Id]
+          WHERE [i].[IsDeleted] = CAST(0 AS bit) AND [i].[CompanyId] = @request_CompanyId AND [p0].[MinimumStock] > 0.0 AND [i].[QuantityOnHand] <= [p0].[MinimumStock]
+          ORDER BY [i].[QuantityOnHand]
+      ) AS [s]
+      INNER JOIN (
+          SELECT [w].[Id], [w].[ArabicName]
+          FROM [Warehouses] AS [w]
+          WHERE [w].[IsDeleted] = CAST(0 AS bit)
+      ) AS [w0] ON [s].[WarehouseId] = [w0].[Id]
+      ORDER BY [s].[QuantityOnHand]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@request_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT [p].[Id], [p].[CompanyId], [p].[Code], [p].[Barcode], [p].[ArabicName], [p].[EnglishName], [p].[Description], [p].[CategoryId], [c0].[ArabicName], [p].[UnitOfMeasureId], [u0].[ArabicName], [p].[PurchasePrice], [p].[SalePrice], [p].[MinimumStock], [p].[IsActive]
+      FROM [Products] AS [p]
+      INNER JOIN (
+          SELECT [c].[Id], [c].[ArabicName]
+          FROM [Categories] AS [c]
+          WHERE [c].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c0] ON [p].[CategoryId] = [c0].[Id]
+      INNER JOIN (
+          SELECT [u].[Id], [u].[ArabicName]
+          FROM [UnitsOfMeasure] AS [u]
+          WHERE [u].[IsDeleted] = CAST(0 AS bit)
+      ) AS [u0] ON [p].[UnitOfMeasureId] = [u0].[Id]
+      WHERE [p].[IsDeleted] = CAST(0 AS bit) AND [p].[CompanyId] = @request_CompanyId
+      ORDER BY [p].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@request_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT [w].[Id], [w].[CompanyId], [w].[BranchId], [w].[Code], [w].[ArabicName], [w].[EnglishName], [w].[Address], [w].[IsActive]
+      FROM [Warehouses] AS [w]
+      WHERE [w].[IsDeleted] = CAST(0 AS bit) AND [w].[IsDeleted] = CAST(0 AS bit) AND [w].[CompanyId] = @request_CompanyId
+      ORDER BY [w].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT [c].[Id], [c].[Code], [c].[ArabicName], [c].[EnglishName], [c].[CurrencyId], [c1].[Code] AS [CurrencyCode], [c].[IsActive]
+      FROM [Companies] AS [c]
+      INNER JOIN (
+          SELECT [c0].[Id], [c0].[Code]
+          FROM [Currencies] AS [c0]
+          WHERE [c0].[IsDeleted] = CAST(0 AS bit)
+      ) AS [c1] ON [c].[CurrencyId] = [c1].[Id]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit)
+      ORDER BY [c].[Code]
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[@request_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT [s].[Id], [s].[DocumentNumber], [s].[DocumentDate], [s].[DueDate], [s].[CustomerId], [s].[WarehouseId], [s].[CustomerReference], [s].[SubTotal], [s].[TotalDiscount], [s].[TotalTax], [s].[TotalAmount], [s].[Notes], [s].[Status]
+      FROM [SalesInvoices] AS [s]
+      WHERE [s].[IsDeleted] = CAST(0 AS bit) AND [s].[CompanyId] = @request_CompanyId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (14ms) [Parameters=[@request_SalesInvoiceId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [s].[Id], [s].[BranchId], [s].[CompanyId], [s].[CreatedAt], [s].[CreatedBy], [s].[CustomerId], [s].[CustomerReference], [s].[DeletedAt], [s].[DeletedBy], [s].[DocumentDate], [s].[DocumentNumber], [s].[DueDate], [s].[FirstApprovedAtUtc], [s].[FirstApprovedByUserId], [s].[IsDeleted], [s].[Notes], [s].[PosSessionId], [s].[PostedAt], [s].[PostedBy], [s].[RowVersion], [s].[SecondApprovedAtUtc], [s].[SecondApprovedByUserId], [s].[Status], [s].[SubTotal], [s].[TotalAmount], [s].[TotalDiscount], [s].[TotalTax], [s].[UpdatedAt], [s].[UpdatedBy], [s].[WarehouseId]
+      FROM [SalesInvoices] AS [s]
+      WHERE [s].[IsDeleted] = CAST(0 AS bit) AND [s].[Id] = @request_SalesInvoiceId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (5ms) [Parameters=[@invoice_CompanyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [c].[Id], [c].[Address], [c].[ArabicName], [c].[City], [c].[Code], [c].[CommercialName], [c].[Country], [c].[CreatedAt], [c].[CreatedBy], [c].[CurrencyId], [c].[DeletedAt], [c].[DeletedBy], [c].[Email], [c].[EnglishName], [c].[IsActive], [c].[IsDeleted], [c].[Logo], [c].[Mobile], [c].[Phone], [c].[PostalCode], [c].[RegistrationNumber], [c].[RowVersion], [c].[TaxNumber], [c].[UpdatedAt], [c].[UpdatedBy], [c].[Website]
+      FROM [Companies] AS [c]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[Id] = @invoice_CompanyId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[@invoice_CustomerId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [c].[Id], [c].[Address], [c].[ArabicName], [c].[BranchId], [c].[Code], [c].[CompanyId], [c].[CreatedAt], [c].[CreatedBy], [c].[CreditLimit], [c].[DeletedAt], [c].[DeletedBy], [c].[Email], [c].[EnglishName], [c].[IsActive], [c].[IsDeleted], [c].[Mobile], [c].[Phone], [c].[ReceivableAccountId], [c].[RowVersion], [c].[TaxNumber], [c].[UpdatedAt], [c].[UpdatedBy]
+      FROM [Customers] AS [c]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[Id] = @invoice_CustomerId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[@company_CurrencyId='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [c].[Code]
+      FROM [Currencies] AS [c]
+      WHERE [c].[IsDeleted] = CAST(0 AS bit) AND [c].[Id] = @company_CurrencyId
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (5ms) [Parameters=[@invoice_Id='?' (DbType = Guid)], CommandType='Text', CommandTimeout='30']
+      SELECT TOP(1) [e].[Id], [e].[AttemptCount], [e].[CreatedAt], [e].[CreatedBy], [e].[DeletedAt], [e].[DeletedBy], [e].[ExternalReferenceId], [e].[IsDeleted], [e].[LastAttemptAtUtc], [e].[ProviderName], [e].[QrCodePayload], [e].[ResponseMessage], [e].[RowVersion], [e].[SalesInvoiceId], [e].[Status], [e].[UpdatedAt], [e].[UpdatedBy]
+      FROM [EInvoiceSubmissions] AS [e]
+      WHERE [e].[IsDeleted] = CAST(0 AS bit) AND [e].[SalesInvoiceId] = @invoice_Id
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (174ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Int32), @p2='?' (Size = 4000), @p3='?' (DbType = Guid), @p4='?' (DbType = DateTime2), @p5='?' (DbType = Guid), @p6='?' (Size = 100), @p7='?' (DbType = Guid), @p8='?' (Size = 100), @p13='?' (DbType = Guid), @p9='?' (DbType = Int32), @p10='?' (DbType = DateTime2), @p14='?' (Size = 8) (DbType = Binary), @p11='?' (DbType = DateTime2), @p12='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+      SET NOCOUNT ON;
+      INSERT INTO [AuditLogs] ([Id], [Action], [ChangesJson], [CompanyId], [CreatedAtUtc], [EntityId], [EntityName], [UserId], [UserName])
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+      UPDATE [EInvoiceSubmissions] SET [AttemptCount] = @p9, [LastAttemptAtUtc] = @p10, [UpdatedAt] = @p11, [UpdatedBy] = @p12
+      OUTPUT INSERTED.[RowVersion]
+      WHERE [Id] = @p13 AND [RowVersion] = @p14;

@@ -1,0 +1,21 @@
+﻿{
+  "companyId": "fba9a1a8-b00c-451f-8ac2-901e13a4e812",
+  "branchId": "056c325e-5890-4300-997b-417411620abf",
+  "customerId": "ba8b4f9d-8952-46be-89bd-4e6565cf08f9",
+  "warehouseId": "2b10988e-8869-4bca-90c1-d66e8bd881d7",
+  "documentNumber": "SINV-TEST-001",
+  "documentDate": "2026-08-12T16:30:00",
+  "dueDate": "2026-09-12T16:30:00",
+  "customerReference": "CUS-TEST-001",
+  "notes": "Weighted average cost sales test",
+  "lines": [
+    {
+      "productId": "38a1eaab-593a-40eb-a6ef-445f4c42907f",
+      "quantity": 1,
+      "unitPrice": 100,
+      "discount": 0,
+      "tax": 0,
+      "notes": "Test sale"
+    }
+  ]
+}

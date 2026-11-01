@@ -1,0 +1,83 @@
+# تشغيل النظام بالكامل (SQL Server + API + Web + Caddy) داخل حاويات معزولة.
+#
+# لم يُختبر هذا الملف فعليًا بتشغيله (Docker غير مثبَّت في بيئة التطوير
+# التي كُتب فيها) — راجعه وجرّبه بنفسك قبل الاعتماد عليه، وأبلغني بأي خطأ.
+#
+# التشغيل على خادم إنتاج حقيقي (مع نطاق ومنافذ 80/443 مفتوحة):
+#   1) انسخ .env.example إلى .env واملأ القيم الحقيقية، بما فيها DOMAIN
+#      (لا تُدرج .env في Git).
+#   2) docker compose up -d --build
+#   3) الواجهة على https://<DOMAIN> — تُصدر شهادة HTTPS تلقائيًا عبر Caddy.
+#
+# للتجربة المحلية بدون نطاق حقيقي: يمكن تجاهل Caddy والوصول مباشرة إلى
+# الويب عبر http://localhost:8081 (لا يزال مفتوحًا لأغراض التطوير/التصحيح).
+
+services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${DB_SA_PASSWORD}
+    ports:
+      - "1433:1433"
+    volumes:
+      - lubaba-sql-data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: LUBABA.API/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ConnectionStrings__DefaultConnection: "Server=sqlserver;Database=LUBABA_ERP;User Id=sa;Password=${DB_SA_PASSWORD};TrustServerCertificate=True;MultipleActiveResultSets=True"
+      Jwt__Key: ${JWT_KEY}
+      Jwt__Issuer: LUBABA.API
+      Jwt__Audience: LUBABA.Clients
+    # لا يُعرَّض API للإنترنت: لا تطبيق سطح المكتب ولا تطبيق الهاتف ولا حتى
+    # الويب نفسه يحتاجون الوصول إليه إلا داخل شبكة Docker الداخلية (اسم
+    # الخدمة "api" يُحل تلقائيًا لعنوانها الداخلي). لا يوجد "ports:" هنا عمدًا.
+
+  web:
+    build:
+      context: .
+      dockerfile: LUBABA.Web/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ApiBaseUrl: "http://api:8080/"
+    ports:
+      - "8081:8080"
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - web
+    environment:
+      DOMAIN: ${DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  lubaba-sql-data:
+  caddy-data:
+  caddy-config:

@@ -1,0 +1,13 @@
+<Solution>
+  <Project Path="D:/LUBABA/LUBABA.API/LUBABA.API.csproj" />
+  <Project Path="LUBABA.API.Tests/LUBABA.API.Tests.csproj" />
+  <Project Path="D:/LUBABA/LUBABA.Application/LUBABA.Application.csproj" />
+  <Project Path="D:/LUBABA/LUBABA.Domain/LUBABA.Domain.csproj" />
+  <Project Path="LUBABA.Application.Tests/LUBABA.Application.Tests.csproj" />
+  <Project Path="LUBABA.Desktop/LUBABA.Desktop.csproj" />
+  <Project Path="LUBABA.Domain.Tests/LUBABA.Domain.Tests.csproj" />
+  <Project Path="LUBABA.Mobile/LUBABA.Mobile.csproj" />
+  <Project Path="LUBABA.Persistence/LUBABA.Persistence.csproj" />
+  <Project Path="LUBABA.Web/LUBABA.Web.csproj" />
+  <Project Path="LUBABA.Web.Tests/LUBABA.Web.Tests.csproj" />
+</Solution>

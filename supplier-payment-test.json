@@ -1,0 +1,12 @@
+﻿{
+  "companyId": "fba9a1a8-b00c-451f-8ac2-901e13a4e812",
+  "branchId": "056c325e-5890-4300-997b-417411620abf",
+  "supplierId": "21166a2c-98c0-4408-a042-432b2150e711",
+  "supplierPayableId": "11df3f6f-c281-468b-82fe-96f270122345",
+  "paymentMethodId": "8381b266-8ffc-43a5-8878-011e836bf292",
+  "documentNumber": "SPAY-TEST-003",
+  "documentDate": "2026-08-13T19:00:00",
+  "amount": 20,
+  "referenceNumber": "TEST-003",
+  "notes": "Clean supplier payment test"
+}

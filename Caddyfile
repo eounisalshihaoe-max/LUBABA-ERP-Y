@@ -1,0 +1,14 @@
+# إعداد Caddy: يوجّه كل طلبات النطاق الحقيقي إلى حاوية الويب عبر HTTPS،
+# ويصدر شهادة Let's Encrypt تلقائيًا (لذلك يجب أن يشير سجل DNS للنطاق
+# إلى عنوان IP هذا الخادم، وأن يكون المنفذان 80 و443 مفتوحين).
+#
+# WebSocket (الضروري لعمل Blazor Server / SignalR) مدعوم تلقائيًا من
+# Caddy عبر reverse_proxy بلا أي إعداد إضافي.
+
+{
+	email {$ACME_EMAIL}
+}
+
+{$DOMAIN} {
+	reverse_proxy web:8080
+}

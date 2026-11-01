@@ -1,0 +1,29 @@
+# Build artifacts
+bin/
+obj/
+.vs/
+
+# Logs and scratch debug output
+*.log
+build.txt
+
+# Database backups
+backups/
+
+# Secrets / tokens / ad-hoc debug payloads (dev-only, but never committed)
+admin_token.txt
+*_id.txt
+*_acct.txt
+create_body_debug.json
+purchase-test*.json
+sales-test.json
+supplier*.json
+swagger.json
+query
+
+# Environment
+.env
+
+# User-specific
+.agents/
+.vs/

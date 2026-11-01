@@ -1,0 +1,14 @@
+﻿{
+    "companyId":  "FBA9A1A8-B00C-451F-8AC2-901E13A4E812",
+    "purchaseDate":  "2026-01-01",
+    "arabicName":  "van",
+    "usefulLifeMonths":  24,
+    "englishName":  "Delivery Van",
+    "salvageValue":  0,
+    "assetAccountId":  "86f92280-6242-431a-bdd1-149c2fd49d9c",
+    "accumulatedDepreciationAccountId":  "1be1d03d-f735-4cd9-8f6b-4566a375c858",
+    "depreciationExpenseAccountId":  "278892f9-af89-48a8-8d97-ddb3add854d4",
+    "purchaseCost":  12000,
+    "code":  "FA-001",
+    "branchId":  "056C325E-5890-4300-997B-417411620ABF"
+}
